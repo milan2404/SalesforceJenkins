@@ -40,6 +40,7 @@ $RECYCLE.BIN/
 .env
 
 deploy/src
+deploy/temp
 
 package.json
 package-lock.json
