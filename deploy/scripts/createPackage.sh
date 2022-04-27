@@ -19,6 +19,28 @@ echo "force-app/main/default/classes/SampleTest.cls" >> temp/modifiedFiles.txt
 
 #copy all modified files to src folder to generate manifest(Package.xml)
 while read c; do
+    echo "$c" >> temp/modifiedFiles2.txt
+    if [[ $c == *-meta.xml ]]
+    then
+        echo $c | sed 's/-meta.xml//' >> temp/modifiedFiles2.txt
+    else
+        echo "$c-meta.xml" >> temp/modifiedFiles2.txt
+    fi
+
+    if [[ $c == *force-app/main/default/*/*/* ]]
+    then
+        rm -f temp/tempFileName.txt
+        folderPath=${c%/*}
+        ls ../$folderPath > temp/tempFileName.txt
+        while read d; do
+            echo "$folderPath/$d" >> temp/modifiedFiles2.txt
+        done < temp/tempFileName.txt
+        rm -f temp/tempFileName.txt
+    fi
+done < temp/modifiedFiles.txt
+
+#copy all modified files to src folder to generate manifest(Package.xml)
+while read c; do
     ROOT=${c%/*}
     mkdir -p "src/$ROOT" && cp "../$c" "src/$c"
-done < temp/modifiedFiles.txt
+done < temp/modifiedFiles2.txt
