@@ -15,6 +15,7 @@ touch temp/modifiedFiles.txt
 
 #get list of all modified files by comparing to main branch
 git diff --minimal --no-renames --no-commit-id --name-only --diff-filter=ACMRTUXB --patch $BNAME ../force-app/main/default >> temp/modifiedFiles.txt
+echo "force-app/main/default/classes/SampleTest.cls" >> temp/modifiedFiles.txt
 
 #copy all modified files to src folder to generate manifest(Package.xml)
 while read c; do
