@@ -6,6 +6,7 @@ mkdir -p temp
 rm -f temp/profiles.txt
 touch temp/profiles.txt
 
+mkdir -p src/force-app/main/default/profiles
 ls "src/force-app/main/default/profiles" > temp/profiles.txt
 
 #Copy json file for profile if not copied as part of delta
