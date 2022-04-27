@@ -32,6 +32,7 @@ pipeline {
                             sh 'git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@https://github.com/SalesforceJenkins.git'
                             sh 'bash createPackage.sh -b origin/main'
                             sh 'bash buildProfiles.sh'
+                            sh 'bash createManifest.sh'
                             sh 'bash fetchTestClasses.sh'
                         }
 
