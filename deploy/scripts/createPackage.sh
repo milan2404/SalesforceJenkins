@@ -29,13 +29,18 @@ while read c; do
 
     if [[ $c == *force-app/main/default/*/*/* ]]
     then
-        rm -f temp/tempFileName.txt
-        folderPath=${c%/*}
-        ls ../$folderPath > temp/tempFileName.txt
-        while read d; do
-            echo "$folderPath/$d" >> temp/modifiedFiles2.txt
-        done < temp/tempFileName.txt
-        rm -f temp/tempFileName.txt
+        if [[ $c == *force-app/main/default/objects/* ]]
+        then
+            echo $c
+        else
+            rm -f temp/tempFileName.txt
+            folderPath=${c%/*}
+            ls ../$folderPath > temp/tempFileName.txt
+            while read d; do
+                echo "$folderPath/$d" >> temp/modifiedFiles2.txt
+            done < temp/tempFileName.txt
+            rm -f temp/tempFileName.txt
+        fi
     fi
 done < temp/modifiedFiles.txt
 
